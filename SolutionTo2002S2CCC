@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int num, den, fact;
+    cin >> num >> den;
+    int rem = num%den;// makes code more readable
+    if(rem == 0){
+        cout << num/den << endl;    // if no remainder just divide and print the number
+    }
+    else{
+       for(int i = rem; i > 0; i--){
+         if(rem%i==0 && den%i==0){
+            fact = i;               // find factors for remainder and denominator to provide simplest form, for '13 5' you would get '2 5/10' without this step, with it: '2, 1/2'.
+            break;
+         }
+       }
+      if(num/den != 0){
+       cout << num/den << " " << rem/fact << "/" << den/fact << endl;   // If the value is greater than 1 we print something like '4 2/3'
+      }
+      else{
+         cout << rem/fact << "/" << den/fact << endl; // if less than 1 we print the fraction by it's self, there is no point in printing '0 2/3', and it's also a formatting requirement
+      }
+    }
+    return 0;
+}
