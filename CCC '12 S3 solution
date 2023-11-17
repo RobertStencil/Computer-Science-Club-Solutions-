@@ -1,0 +1,82 @@
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <algorithm>
+#include <math.h>
+
+int main()
+{
+    int n ,temp, mFrequent, counter, temploc, tempR, second;
+    cin >> n;
+    vector<int> reading;
+    vector<int> frequency;
+
+    for(int i = 0; i < n; i++){
+        cin >> temp;
+        reading.push_back(temp);
+    }
+
+    sort(reading.begin(), reading.end());
+
+    counter = 0;
+    temp = reading[0];
+    for(int i = 0; i <= n; i++){
+        if(reading[i] == temp){
+            counter++;
+        }
+        else{
+            frequency.push_back(counter);
+            counter = 1;
+        }
+        temp = reading[i];
+    }
+
+    reading.erase( unique( reading.begin(), reading.end() ), reading.end() );
+/*
+    copy(reading.begin(), reading.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;       // meant so that I can demonstrate the code if need be :D:D:D:D
+    copy(frequency.begin(), frequency.end(), ostream_iterator<int>(cout, " "));
+*/
+
+    temp = 0;
+    tempR = 0;
+    for(int i = 0 ; i < reading.size(); i++){
+        if(frequency[i] > temp){
+          if(reading[i] > tempR){
+            temp = frequency[i];
+            tempR = reading[i];
+            temploc = i;
+          }
+        }
+    }
+    mFrequent = reading[temploc];
+    reading.erase(reading.begin() + temploc);
+    frequency.erase(frequency.begin() + temploc);
+
+    /*
+    copy(reading.begin(), reading.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+    copy(frequency.begin(), frequency.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+    */
+
+    temp = 0;
+    tempR = 0;
+    for(int i = 0 ; i < reading.size(); i++){
+        if(frequency[i] >= temp){
+          if(abs(reading[i]-mFrequent) > tempR || frequency[i] > temp){
+            temp = frequency[i];
+            tempR = abs(reading[i]-mFrequent);
+            temploc = i;
+          }
+        }
+    }
+
+    second = reading[temploc];
+    cout << abs(mFrequent - second) << endl;
+
+    return 0;
+}
+
+
+
