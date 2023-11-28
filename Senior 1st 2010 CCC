@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main()
+{
+   int n, temp;
+   int lable;
+   int big = 0;
+   cin >> n;
+   if( n == 0){
+        return 0;
+   }
+   string name[n];
+   vector <int> spec[n];
+   for(int i = 0; i < n; i++){
+    cin >> name[i];
+    for(int j = 0; j < 3; j++){
+        cin >> temp;
+        spec[i].push_back(temp);
+    }
+    cin.ignore(256, '\n');
+    cin.clear();
+   }
+for(int b = 0; b < 2; b++){
+   for(int i = 0; i < n; i++){
+        temp = (spec[i][0]*2)+(spec[i][1]*3)+(spec[i][2]);
+      //  cout << temp << endl;
+        if(big < temp || big == temp && name[lable][0] > name[i][0]){
+            big = temp;
+            lable = i;
+        }
+   }
+   spec[lable][0] = 0;
+   spec[lable][1] = 0;
+   spec[lable][2] = 0;
+   cout << name[lable] << endl;
+   big = 0;
+
+   if(n == 1){
+     break;
+   }
+ }
+    return 0;
+}
