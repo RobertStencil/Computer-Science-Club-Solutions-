@@ -1,0 +1,47 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main()
+{
+
+  int number;
+  bool disable = false;
+  cin >> number;
+  int arr[number][2];
+  vector <int> arrc;
+  vector <int> temp;
+
+  for(int i = 0; i < number; i++){
+    cin >> arr[i][0] >> arr[i][1];
+  }
+  for(int i = 0; i < number; i++){
+    disable = false;
+    for(int j = 0; j < arr[i][0]; j++){
+      if(disable == false){
+        for(int o = 0; o < arr[i][1]; o++){     // puts values into vector
+            arrc.push_back(1);
+            j++;
+        }
+        disable = true;
+      }
+      if(j < arr[i][0]){
+     arrc.push_back(0);
+     }
+    }
+  sort(arrc.begin(),arrc.end());
+  reverse(arrc.begin(),arrc.end());
+  cout << "The bit patterns are" << endl;
+  do {
+    for(int l = 0; l < arrc.size(); l++){
+            cout << arrc[l]; // print
+    }
+     cout << endl;
+  } while ( prev_permutation(arrc.begin(),arrc.end()));
+    arrc.clear();
+    if(i+1 == number){break;}
+    cout << endl;
+  }
+    return 0;
+}
